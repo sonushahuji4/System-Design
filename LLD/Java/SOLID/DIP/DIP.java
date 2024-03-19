@@ -155,7 +155,7 @@ class Sms implements IMessage {
     sendMessage(message: string): void {
         console.log(`Sending SMS notification: ${message}`);
     }
-}
+} 
 
 class Notification {
     private messageServices: IMessage[];
