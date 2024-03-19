@@ -122,3 +122,7 @@ This adheres to the Open/Closed Principle, as the Shape interface is open for ex
   After going through this concept, I've understood that in order to comply with the Open/Closed Principle, 
   one should not define methods in the base class. Instead, interfaces should be used for it
   */
+
+
+  /** Good And Easy Article to read on this topic */
+  /** Link : https://h-benkachoud.medium.com/ocp-open-closed-principle-ecc2ce89bf7f */

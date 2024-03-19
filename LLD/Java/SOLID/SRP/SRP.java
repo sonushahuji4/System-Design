@@ -370,3 +370,6 @@ public class Penguin extends Bird implements Swimmable, Walkable {
         System.out.println("Penguin is walking");
     }
 }
+
+/** Good Article To Read On This Topic */
+/** Link : https://h-benkachoud.medium.com/srp-single-responsability-principle-a19cfe02d3ed */
