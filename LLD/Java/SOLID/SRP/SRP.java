@@ -188,3 +188,185 @@ public class Bird {
     public abstract void fly();
     public abstract void makeSound();
   }
+
+  /** here, have one base class and then for each bird class extend base class and implements it's method since each bird will have it's own way of making fly and sound etc */
+
+  public class Pigeon extends Bird {
+    public void fly(){}
+    public void makeSound(){}
+  }
+
+  public class Kukoo extends Bird {
+    public void fly(){}
+    public void makeSound(){}
+  }
+
+  /** each sub class has to implement all the methods of parent or base class
+   * Pigeon cannot fly but kukoo can fly.
+   * why do implement the fly() method in Pigeon class ? that's why interface comes in the picture
+   */
+
+
+   /** Above issue is beign solved using Interface */
+
+   /**
+    * Sure, let's refactor the `Bird` class to better adhere to the Single Responsibility Principle (SRP) based on these attributes and actions:
+
+```java
+public class Bird {
+    private String name;
+    private boolean hasWings;
+    private String color;
+    
+    public Bird(String name, boolean hasWings, String color) {
+        this.name = name;
+        this.hasWings = hasWings;
+        this.color = color;
+    }
+    
+    public String getName() {
+        return name;
+    }
+    
+    public boolean hasWings() {
+        return hasWings;
+    }
+    
+    public String getColor() {
+        return color;
+    }
+}
+
+public interface Flyable {
+    void fly();
+}
+
+public interface Swimmable {
+    void swim();
+}
+
+public interface Walkable {
+    void walk();
+}
+
+public interface Singable {
+    void sing();
+}
+
+public class Eagle extends Bird implements Flyable, Walkable {
+    public Eagle(String name, String color) {
+        super(name, true, color);
+    }
+
+    @Override
+    public void fly() {
+        System.out.println("Eagle is flying");
+    }
+
+    @Override
+    public void walk() {
+        System.out.println("Eagle is walking");
+    }
+}
+
+public class Penguin extends Bird implements Swimmable, Walkable {
+    public Penguin(String name, String color) {
+        super(name, false, color);
+    }
+
+    @Override
+    public void swim() {
+        System.out.println("Penguin is swimming");
+    }
+
+    @Override
+    public void walk() {
+        System.out.println("Penguin is walking");
+    }
+}
+```
+
+In this refactored version:
+
+- The `Bird` class only contains attributes related to birds (name, hasWings, color) and basic getters.
+- We introduce separate interfaces (`Flyable`, `Swimmable`, `Walkable`, `Singable`) to represent different actions that birds can perform.
+- Concrete bird classes (`Eagle`, `Penguin`) extend the `Bird` class and implement the relevant interfaces based on their capabilities.
+- Each concrete bird class is responsible for implementing specific actions it can perform, adhering to SRP.
+
+This refactoring adheres to SRP by separating concerns and ensuring that each class and interface has a single responsibility. 
+The `Bird` class focuses on representing bird attributes, 
+while concrete bird classes and interfaces handle specific behaviors related to flying, swimming, walking, and singing.
+    */
+
+public class Bird {
+
+    private String name;
+    private boolean hasWings;
+    private String color;
+    
+    public Bird(String name, boolean hasWings, String color) {
+        this.name = name;
+        this.hasWings = hasWings;
+        this.color = color;
+    }
+    
+    public String getName() {
+        return name;
+    }
+    
+    public boolean hasWings() {
+        return hasWings;
+    }
+    
+    public String getColor() {
+        return color;
+    }
+}
+
+public interface Flyable {
+    void fly();
+}
+
+public interface Swimmable {
+    void swim();
+}
+
+public interface Walkable {
+    void walk();
+}
+
+public interface Singable {
+    void sing();
+}
+
+public class Eagle extends Bird implements Flyable, Walkable {
+    public Eagle(String name, String color) {
+        super(name, true, color);
+    }
+
+    @Override
+    public void fly() {
+        System.out.println("Eagle is flying");
+    }
+
+    @Override
+    public void walk() {
+        System.out.println("Eagle is walking");
+    }
+}
+
+public class Penguin extends Bird implements Swimmable, Walkable {
+    public Penguin(String name, String color) {
+        super(name, false, color);
+    }
+
+    @Override
+    public void swim() {
+        System.out.println("Penguin is swimming");
+    }
+
+    @Override
+    public void walk() {
+        System.out.println("Penguin is walking");
+    }
+}
