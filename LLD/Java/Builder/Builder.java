@@ -1,3 +1,5 @@
+// Study Link : https://github.com/Akashpal95/design-patterns?tab=readme-ov-file
+
 /** Builder Design Pattern
  * 1. It deals with, how to create complex classes with lots of attributes.
  */
@@ -382,5 +384,208 @@ import java.util.List;
 
     public void setParentInfo(String parentInfo) {
         this.parentInfo = parentInfo;
+    }
+}
+
+Builder b = new Builder();
+b.setName("sonu")
+b.setAge(20)
+.
+.
+.
+n
+// and then apply validation
+// We can still improve our solution
+
+
+
+
+/** Builder Class */
+
+package DesignPatterns.BuilderPattern;
+
+public class Builder {
+    String name;
+    int age;
+    int psp;
+    String univName;
+    long phnNo;
+    int gradYear;
+
+
+//    public Student build() throws Exception{
+//        return new Student(this);
+//    }
+
+    public Builder setName(String name) {
+        this.name = name;
+        return this;
+    }
+
+    public Builder setAge(int age) {
+        this.age = age;
+        return this;
+    }
+
+    public Builder setPsp(int psp) {
+        this.psp = psp;
+        return this;
+    }
+
+    public Builder setUnivName(String univName) {
+        this.univName = univName;
+        return this;
+    }
+
+    public Builder setPhnNo(long phnNo) {
+        this.phnNo = phnNo;
+        return this;
+    }
+
+    public Builder setGradYear(int gradYear) {
+        this.gradYear = gradYear;
+        return this;
+    }
+}
+
+
+
+/** Student Class */
+
+package DesignPatterns.BuilderPattern;
+
+import javax.xml.validation.Validator;
+
+public class Student {
+    String name;
+    int age;
+    int psp;
+    String univName;
+    long phnNo;
+    int gradYear;
+
+    public static Builder getBuilder(){
+        return new Builder();
+    }
+
+    private Student(Builder studB) throws Exception{
+        if(studB.name != null){
+            if(studB.name.length() <= 1){
+                throw new Exception("Validation Failed");
+            }
+        }
+
+        if(studB.age < 20){
+            throw  new Exception("Validation Failed");
+        }
+
+        if(studB.phnNo ==123456789){
+            throw new Exception("Invalid");
+        }
+
+
+        this.name = studB.name;
+        this.age = studB.age;
+        this.psp = studB.psp;
+        this.univName = studB.univName;
+        this.phnNo = studB.phnNo;
+        this.gradYear = studB.gradYear;
+
+    }
+
+    public static class Builder {
+        String name;
+        int age;
+        int psp;
+        String univName;
+        long phnNo;
+        int gradYear;
+
+        public Student build() throws Exception{
+            return new Student(this);
+        }
+
+        public Builder setName(String name) {
+            this.name = name;
+            return this;
+        }
+
+        public Builder setAge(int age) {
+            this.age = age;
+            return this;
+        }
+
+        public Builder setPsp(int psp) {
+            this.psp = psp;
+            return this;
+        }
+
+        public Builder setUnivName(String univName) {
+            this.univName = univName;
+            return this;
+        }
+
+        public Builder setPhnNo(long phnNo) {
+            this.phnNo = phnNo;
+            return this;
+        }
+
+        public Builder setGradYear(int gradYear) {
+            this.gradYear = gradYear;
+            return this;
+        }
+    }
+
+}
+
+
+/** Client Class */
+
+package DesignPatterns.BuilderPattern;
+
+public class Client {
+
+    public static void main(String[] args) {
+
+        try {
+
+
+            //Solution 1
+//            Builder b = new Builder();
+//            b.setName("Akash");
+//            b.setAge(20);
+//            Student s = new Student(b);
+
+            //Solution 2
+//            Builder b = Student.getBuilder()
+//                    .setAge(20)
+//                    .setName("Akash")
+//                    .setGradYear(2020)
+//                    .setPsp(1)
+//                    .setUnivName("SRM");
+//            Student s = new Student(b);
+//
+            //Solution 3
+//            Student s = new Student(Student.getBuilder()
+//                    .setAge(20)
+//                    .setName("Akash")
+//                    .setGradYear(2020)
+//                    .setPsp(1)
+//                    .setUnivName("SRM"));
+
+            //Solution 4
+            Student s = Student.getBuilder()
+                    .setAge(20)
+                    .setName("Akash")
+                    .setGradYear(2020)
+                    .setPsp(1)
+                    .setUnivName("SRM")
+                    .build();
+
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
