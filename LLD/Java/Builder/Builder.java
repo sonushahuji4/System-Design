@@ -589,3 +589,264 @@ public class Client {
         }
     }
 }
+
+/////////////////////////////////////
+
+package com.assignment.question;
+
+public class Query {
+
+    private String select;
+    private String from;
+    private String where;
+    private String join;
+    private String orderBy;
+    private String groupBy;
+
+    public Query(String select, String from, String where, String join, String orderBy, String groupBy) {
+        this.select = select;
+        this.from = from;
+        this.where = where;
+        this.join = join;
+        this.orderBy = orderBy;
+        this.groupBy = groupBy;
+    }
+
+    public String getSelect() {
+        return select;
+    }
+
+    public String getFrom() {
+        return from;
+    }
+
+    public String getWhere() {
+        return where;
+    }
+
+    public String getJoin() {
+        return join;
+    }
+
+    public String getOrderBy() {
+        return orderBy;
+    }
+
+    public String getGroupBy() {
+        return groupBy;
+    }
+}
+
+
+package com.assignment.question;
+
+// This class uses the Builder design pattern to create instances of the QueryBuilder class
+@WithBuilder
+public class QueryBuilder {
+
+    // These are the properties of a SQL query
+    private String select;
+    private String from;
+    private String where;
+    private String join;
+    private String orderBy;
+    private String groupBy;
+
+    // This private constructor is used by the Builder to create an instance of QueryBuilder
+    private QueryBuilder(Builder builder){
+      this.select = builder.getSelect();
+      this.from = builder.getFrom();
+      this.where = builder.getWhere();
+      this.join = builder.getJoin();
+      this.orderBy = builder.getOrderBy();
+      this.groupBy = builder.getGroupBy();
+    }
+
+    // This static method returns a new instance of the Builder
+    public static Builder createBuilder(){
+      return new Builder();
+    }
+
+    // This is the Builder class
+    public static class Builder{
+      // These fields correspond to the properties of the QueryBuilder class
+      private String select;
+      private String from;
+      private String where;
+      private String join;
+      private String orderBy;
+      private String groupBy;
+
+      // Getter methods for each property
+
+      public String getSelect() {
+          return select;
+      }
+
+      public String getFrom() {
+          return from;
+      }
+
+      public String getWhere() {
+          return where;
+      }
+
+      public String getJoin() {
+          return join;
+      }
+
+      public String getOrderBy() {
+          return orderBy;
+      }
+
+      public String getGroupBy() {
+          return groupBy;
+      }
+
+      // This method creates a new instance of QueryBuilder using the current state of the Builder
+      public QueryBuilder build(){
+        return new QueryBuilder(this);
+      }
+    }
+}
+
+///////////////////////////////////////////
+
+
+package com.assignment.question;
+
+public class DatabaseConfiguration {
+
+    private String databaseUrl;
+    private String username;
+    private String password;
+    private int maxConnections;
+    private boolean enableCache;
+    private boolean isReadOnly;
+
+    public DatabaseConfiguration(String databaseUrl, String username, String password, int maxConnections, boolean enableCache, boolean isReadOnly) {
+        this.databaseUrl = databaseUrl;
+        this.username = username;
+        this.password = password;
+        this.maxConnections = maxConnections;
+        this.enableCache = enableCache;
+        this.isReadOnly = isReadOnly;
+    }
+
+    public String getDatabaseUrl() {
+        return databaseUrl;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public int getMaxConnections() {
+        return maxConnections;
+    }
+
+    public boolean isEnableCache() {
+        return enableCache;
+    }
+
+    public boolean isReadOnly() {
+        return isReadOnly;
+    }
+}
+
+package com.assignment.question;
+
+@WithBuilder
+public class DatabaseConfigurationBuilder {
+    private String databaseUrl;
+    private String username;
+    private String password;
+    private int maxConnections;
+    private boolean enableCache;
+    private boolean isReadOnly;
+
+    private DatabaseConfigurationBuilder(Builder builder){
+        this.databaseUrl = builder.getDatabaseUrl();
+        this.username = builder.getUsername();
+        this.password = builder.getPassword();
+        this.maxConnections = builder.getMaxConnections();
+        this.enableCache = builder.isEnableCache();
+        this.isReadOnly = builder.isReadOnly();
+    }
+
+    public static Builder getBuilder(){
+        return new Builder();
+    }
+
+    public static class Builder{
+        private String databaseUrl;
+        private String username;
+        private String password;
+        private int maxConnections;
+        private boolean enableCache;
+        private boolean isReadOnly;
+
+        public Builder settDatabaseUrl(String databaseUrl){
+            this.databaseUrl = databaseUrl;
+            return this;
+        }
+
+        public Builder setUsername(String username){
+            this.username = username;
+            return this;
+        }
+
+        public Builder getPassword(String password){
+            this.password = password;
+            return this;
+        }
+
+        public Builder getMaxConnections(int maxConnections){
+            this.maxConnections = maxConnections;
+            return this;
+        }
+
+        public Builder isEnableCache(boolean enableCache){
+            this.enableCache = enableCache;
+            return this;
+        }
+
+        public Builder isReadOnly(boolean isReadOnly){
+            this.isReadOnly = isReadOnly;
+            return this;
+        }
+
+        public String getDatabaseUrl(){
+            return databaseUrl;
+        }
+
+        public String getUsername(){
+            return username;
+        }
+
+        public String getPassword(){
+            return password;
+        }
+
+        public int getMaxConnections(){
+            return maxConnections;
+        }
+
+        public boolean isEnableCache(){
+            return enableCache;
+        }
+
+        public boolean isReadOnly(){
+            return isReadOnly;
+        }
+
+        public DatabaseConfigurationBuilder build() {
+            return new DatabaseConfigurationBuilder(this);
+        }
+    }
+
+}
