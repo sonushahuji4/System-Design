@@ -850,3 +850,143 @@ public class DatabaseConfigurationBuilder {
     }
 
 }
+
+
+////////////////////////////////////////////////
+
+
+package com.assignment.question;
+
+public class Message {
+
+    private MessageType messageType;
+    private String content;
+    private String sender;
+    private String recipient;
+    private boolean isDelivered;
+    private long timestamp;
+
+    public Message(MessageType messageType, String content, String sender, String recipient, boolean isDelivered, long timestamp) {
+        this.messageType = messageType;
+        this.content = content;
+        this.sender = sender;
+        this.recipient = recipient;
+        this.isDelivered = isDelivered;
+        this.timestamp = timestamp;
+    }
+
+    public MessageType getMessageType() {
+        return messageType;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public String getSender() {
+        return sender;
+    }
+
+    public String getRecipient() {
+        return recipient;
+    }
+
+    public boolean isDelivered() {
+        return isDelivered;
+    }
+
+    public long getTimestamp() {
+        return timestamp;
+    }
+}
+
+
+package com.assignment.question;
+
+@WithBuilder
+public class MessageBuilder {
+
+    private MessageType messageType;
+    private String content;
+    private String sender;
+    private String recipient;
+    private boolean isDelivered;
+    private long timestamp;
+
+    public static Builder builder() {
+        return new Builder();
+    }
+
+    public static class Builder {
+
+        private MessageBuilder messageBuilder;
+
+        public Builder() {
+            messageBuilder = new MessageBuilder();
+        }
+
+        public Builder messageType(MessageType messageType) {
+            messageBuilder.messageType = messageType;
+            return this;
+        }
+
+        public Builder content(String content) {
+            messageBuilder.content = content;
+            return this;
+        }
+
+        public Builder sender(String sender) {
+            messageBuilder.sender = sender;
+            return this;
+        }
+
+        public Builder recipient(String recipient) {
+            messageBuilder.recipient = recipient;
+            return this;
+        }
+
+        public Builder isDelivered(boolean isDelivered) {
+            messageBuilder.isDelivered = isDelivered;
+            return this;
+        }
+
+        public Builder timestamp(long timestamp) {
+            messageBuilder.timestamp = timestamp;
+            return this;
+        }
+
+        public MessageBuilder build() {
+
+            MessageBuilder messageBuilder = new MessageBuilder();
+            messageBuilder.messageType = this.messageBuilder.messageType;
+            messageBuilder.content = this.messageBuilder.content;
+            messageBuilder.sender = this.messageBuilder.sender;
+            messageBuilder.recipient = this.messageBuilder.recipient;
+            messageBuilder.isDelivered = this.messageBuilder.isDelivered;
+            messageBuilder.timestamp = this.messageBuilder.timestamp;
+            return messageBuilder;
+        }
+    }
+
+}
+
+package com.assignment.question;
+
+public enum MessageType {
+    TEXT,
+    IMAGE,
+    AUDIO,
+    VIDEO
+}
+
+package com.assignment.question;
+
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.TYPE)
+public @interface WithBuilder {
+}
